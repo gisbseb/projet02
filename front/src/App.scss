@@ -1,0 +1,44 @@
+.app {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icone {
+  height: 2.5em;
+}
+
+.bg-white {
+  background-color: white;
+}
+
+.bg-light {
+  background: #f3f6fa;
+}
+
+.hover-fade {
+  transition: opacity 0.2s;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.5;
+  }
+}
+
+.container {
+  padding: 1em;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+}
+
+.bold {
+  font-family: "Barlow-bold";
+}
+
+.regular {
+  font-family: "Barlow-regular";
+}
+
+.light {
+  font-family: "Barlow-light";
+}

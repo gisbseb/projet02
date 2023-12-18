@@ -1,0 +1,10 @@
+.login-form {
+  display: grid;
+  gap: 1em;
+  width: clamp(150px, 250px, 95%);
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2em;
+  }
+}
