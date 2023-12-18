@@ -5,6 +5,7 @@ import mysql from "mysql2/promise";
 import Categorie from "./models/Categorie.js";
 
 import populateDb from "./bdd/populateDb.js";
+import router from "./router/router.js";
 dotenv.config();
 
 const app = express();
@@ -50,10 +51,7 @@ async function testConnection() {
   }
 }
 testConnection();
-app.use("/", (req, res) => {
-  res.send("super");
-});
-
+app.use(router);
 app.listen(APP_PORT, () => {
   console.log(`server starter: http://${APP_HOST}:${APP_PORT}`);
 });
