@@ -31,7 +31,6 @@ const NewFurniture = () => {
     e.preventDefault();
 
     try {
-      // Assuming you have an endpoint for creating a new material
       const response = await fetch("http://localhost:8000/furniture", {
         method: "POST",
         headers: {
@@ -44,10 +43,8 @@ const NewFurniture = () => {
         throw new Error("Failed to create a new material");
       }
 
-      // Handle success, for example, redirect or show a success message
       console.log("Material created successfully");
     } catch (error) {
-      // Handle errors, for example, show an error message
       console.error("Error creating material:", error.message);
     }
   };
