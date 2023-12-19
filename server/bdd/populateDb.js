@@ -26,16 +26,16 @@ const companyData = [
 const categoriesData = [{ name: "Armoire" }, { name: "Etagère" }];
 
 const furnituresData = [
-  { categorieId: 1, name: "Armoire Bella", creationCount: 3 },
-  { categorieId: 2, name: "Étagère Cascade", creationCount: 5 },
-  { categorieId: 1, name: "Armoire Luna", creationCount: 6 },
-  { categorieId: 2, name: "Étagère Éclipse", creationCount: 2 },
-  { categorieId: 1, name: "Armoire Royale", creationCount: 1 },
-  { categorieId: 2, name: "Étagère Horizon", creationCount: 8 },
-  { categorieId: 1, name: "Armoire Solstice", creationCount: 9 },
-  { categorieId: 2, name: "Étagère Enchantée", creationCount: 11 },
-  { categorieId: 1, name: "Armoire Élégance", creationCount: 5 },
-  { categorieId: 2, name: "Étagère Prismatique", creationCount: 7 },
+  { categorieId: 1, name: "Bella", creationCount: 3 },
+  { categorieId: 2, name: "Cascade", creationCount: 5 },
+  { categorieId: 1, name: "Luna", creationCount: 6 },
+  { categorieId: 2, name: "Éclipse", creationCount: 2 },
+  { categorieId: 1, name: "Royale", creationCount: 1 },
+  { categorieId: 2, name: "Horizon", creationCount: 8 },
+  { categorieId: 1, name: "Solstice", creationCount: 9 },
+  { categorieId: 2, name: "Enchantée", creationCount: 11 },
+  { categorieId: 1, name: "Élégance", creationCount: 5 },
+  { categorieId: 2, name: "Prismatique", creationCount: 7 },
 ];
 
 const populateDb = async () => {

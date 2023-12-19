@@ -14,14 +14,16 @@ const FurnitureChart = ({ currentPage, pageTitle }) => {
   const getFurnitureValue = (item) => item.creationCount;
 
   return (
-    <MyChart
-      data={data}
-      chartId="chartFurniture"
-      label="Meubles les plus créer"
-      getLabel={getFurnitureLabel}
-      getValue={getFurnitureValue}
-      chartType="bar"
-    />
+    <>
+      <MyChart
+        data={data}
+        chartId="chartFurniture"
+        label="Meubles les plus créer"
+        getLabel={getFurnitureLabel}
+        getValue={getFurnitureValue}
+        chartType="doughnut"
+      />
+    </>
   );
 };
 

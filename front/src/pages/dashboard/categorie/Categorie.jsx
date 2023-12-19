@@ -21,9 +21,6 @@ const Categorie = ({ pageTitle, currentPage }) => {
             <tr key={idx}>
               <td>{idx + 1}</td>
               <td>{el.name}</td>
-              <td>
-                <button>Voir</button>
-              </td>
             </tr>
           ))}
         </tbody>

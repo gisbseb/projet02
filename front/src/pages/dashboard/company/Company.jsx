@@ -15,7 +15,6 @@ const Company = ({ pageTitle, currentPage }) => {
           <tr>
             <th>N°</th>
             <th>Raison social</th>
-            <th>Détails</th>
           </tr>
         </thead>
         <tbody>
@@ -23,9 +22,6 @@ const Company = ({ pageTitle, currentPage }) => {
             <tr key={idx}>
               <td>{idx + 1}</td>
               <td>{el.socialReason}</td>
-              <td>
-                <button>Voir</button>
-              </td>
             </tr>
           ))}
         </tbody>

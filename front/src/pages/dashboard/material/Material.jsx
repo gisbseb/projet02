@@ -19,7 +19,6 @@ const Material = ({ pageTitle, currentPage }) => {
             <th>N°</th>
             <th>Name</th>
             <th>Stock</th>
-            <th>Détails</th>
           </tr>
         </thead>
         <tbody>
@@ -28,9 +27,6 @@ const Material = ({ pageTitle, currentPage }) => {
               <td>{idx + 1}</td>
               <td>{el.name}</td>
               <td>{el.stock}</td>
-              <td>
-                <button>Voir</button>
-              </td>
             </tr>
           ))}
         </tbody>

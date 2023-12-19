@@ -19,7 +19,7 @@ const MaterialsChart = ({ currentPage, pageTitle }) => {
     <MyChart
       data={data}
       chartId="chartMaterial"
-      label="Matériaux les plus utilisés"
+      label="Matériaux utilisés"
       getLabel={getMaterialLabel}
       getValue={getMaterialValue}
       chartType="doughnut"
