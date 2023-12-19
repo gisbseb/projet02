@@ -1,17 +1,24 @@
 import { useState } from "react";
 import "./LoginForm.scss";
+import { useNavigate } from "react-router-dom";
 const LoginForm = () => {
   const [formData, setFormData] = useState({ username: "", password: "" });
+
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    navigate("/dashboard");
+  };
 
   return (
-    <form className="login-form container">
+    <form className="login-form container bg-white" onSubmit={handleSubmit}>
       <div className="form-group ">
-        <label htmlFor="username">Identifiant</label>
+        <label htmlFor="username">Identifiant :</label>
         <input
           id="username"
           name="username"
@@ -21,7 +28,7 @@ const LoginForm = () => {
         />
       </div>
       <div className="form-group">
-        <label htmlFor="password">Mot de passe</label>
+        <label htmlFor="password">Mot de passe :</label>
         <input
           id="password"
           name="password"
@@ -30,6 +37,8 @@ const LoginForm = () => {
           onChange={handleChange}
         />
       </div>
+
+      <button type="submit">Connexion</button>
     </form>
   );
 };

@@ -1,8 +1,7 @@
 .app {
   min-height: 100vh;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
 }
 
 .icone {
@@ -17,7 +16,8 @@
   background: #f3f6fa;
 }
 
-.hover-fade {
+.hover-fade,
+button {
   transition: opacity 0.2s;
   cursor: pointer;
 
@@ -28,7 +28,18 @@
 
 .container {
   padding: 1em;
+  background: white;
+  width: fit-content;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 2px;
+}
+h1 {
+  font-size: 1.4em;
+  font-family: "Barlow-bold";
+}
+h2 {
+  font-size: 1.3em;
+  font-family: "Barlow-regular";
 }
 
 .bold {
@@ -41,4 +52,23 @@
 
 .light {
   font-family: "Barlow-light";
+}
+
+button {
+  border: none;
+  outline: none;
+  margin: auto;
+  padding: 0.5em 2.5em;
+  background-color: #2b2a29;
+  color: white;
+  border-radius: 2px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+}
+input {
+  border: none;
+  outline: none;
+  background: #f3f6fa;
+  box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.15);
+  padding: 0.5em 1em;
+  border-radius: 2px;
 }

@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import sequelize from "./bdd/sequelize.js";
 import mysql from "mysql2/promise";
 import Categorie from "./models/Categorie.js";
-
+import cors from "cors";
 import populateDb from "./bdd/populateDb.js";
 import router from "./router/router.js";
 dotenv.config();
@@ -51,6 +51,13 @@ async function testConnection() {
   }
 }
 testConnection();
+
+app.use(
+  cors({
+    origin: ["http://localhost:5173", "http://localhost:5174"],
+    credentials: true,
+  })
+);
 app.use(router);
 app.listen(APP_PORT, () => {
   console.log(`server starter: http://${APP_HOST}:${APP_PORT}`);

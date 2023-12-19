@@ -1,6 +1,4 @@
 .navbar {
-  position: absolute;
-  top: 0;
   width: 100%;
 
   padding: 0.5em 1em;
@@ -10,4 +8,19 @@
   .logo {
     height: 2.5em;
   }
+
+  ul {
+    display: flex;
+    align-items: center;
+    gap: 2em;
+  }
+}
+
+.active {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.active:has(.logo) {
+  opacity: 1;
 }
