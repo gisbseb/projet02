@@ -2,15 +2,12 @@ import { useEffect, useState } from "react";
 import NewFurniture from "./NewFurniture";
 import useFetch from "../../../hooks/useFetch";
 import { Modal } from "../../../components/modal/Modal";
+import IncrementFurniture from "./IncrementFurniture";
 const Furniture = ({ pageTitle, currentPage }) => {
   const [isAddFurnitureOpen, setIsAddFurnitureOpen] = useState(false);
   const { data, loading, error, refetch } = useFetch(
     "http://localhost:8000/furniture"
   );
-
-  useEffect(() => {
-    refetch("http://localhost:8000/furniture");
-  }, []);
 
   if (loading) return <p>Chargement...</p>;
   if (error) return <p>Erreur lors du chargement des données.</p>;
@@ -19,7 +16,7 @@ const Furniture = ({ pageTitle, currentPage }) => {
   return (
     <>
       <Modal isOpen={isAddFurnitureOpen} setIsOpen={setIsAddFurnitureOpen}>
-        <NewFurniture setIsOpen={setIsAddFurnitureOpen} />
+        <NewFurniture setIsOpen={setIsAddFurnitureOpen} refetch={refetch} />
       </Modal>
       {!isAddFurnitureOpen && (
         <button onClick={() => setIsAddFurnitureOpen(true)}>
@@ -46,7 +43,7 @@ const Furniture = ({ pageTitle, currentPage }) => {
                 <td>{el.name}</td>
                 <td>{el.creationCount}</td>
                 <td>
-                  <span className="add hover-fade">+</span>
+                  <IncrementFurniture furnitureId={el.id} refetch={refetch} />
                 </td>
               </tr>
             ))}

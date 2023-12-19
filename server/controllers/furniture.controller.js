@@ -76,6 +76,7 @@ const createFurniture = async (req, res) => {
     return res.status(500).json({ message: "Une erreur est survenue" });
   }
 };
+
 export default {
   getFurnitures,
   createFurniture,

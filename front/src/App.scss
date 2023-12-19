@@ -94,3 +94,8 @@ input {
   margin: auto;
   font-size: 1.2em;
 }
+
+button:disabled {
+  pointer-events: none;
+  opacity: 0.2;
+}

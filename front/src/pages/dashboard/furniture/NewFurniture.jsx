@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import useFetch from "../../../hooks/useFetch";
 import "./newFurniture.scss";
-const NewFurniture = ({ setIsOpen }) => {
+const NewFurniture = ({ setIsOpen, refetch }) => {
   const [furnitureData, setFurnitureData] = useState({
     name: "",
     materials: [],
     category: "",
   });
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFurnitureData({ ...furnitureData, [name]: value });
@@ -47,6 +48,7 @@ const NewFurniture = ({ setIsOpen }) => {
     } catch (error) {
       console.error("Error creating material:", error.message);
     }
+    refetch();
     setIsOpen(false);
   };
   const {
