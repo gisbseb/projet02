@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import useFetch from "../../../hooks/useFetch";
-
-const NewFurniture = () => {
+import "./newFurniture.scss";
+const NewFurniture = ({ setIsOpen }) => {
   const [furnitureData, setFurnitureData] = useState({
     name: "",
     materials: [],
@@ -47,6 +47,7 @@ const NewFurniture = () => {
     } catch (error) {
       console.error("Error creating material:", error.message);
     }
+    setIsOpen(false);
   };
   const {
     data: materials,
@@ -64,17 +65,44 @@ const NewFurniture = () => {
   }, [materials, categories]);
   return (
     <form onSubmit={handleSubmit}>
-      <div className="form-group login-form container">
-        <label htmlFor="name"> Nom</label>
-        <input
-          id="name"
-          type="text"
-          name="name"
-          value={furnitureData.name}
-          onChange={handleChange}
-        />
+      <div className="newFurniture">
+        <div className="form-group  ">
+          <label htmlFor="name"> Nom</label>
+          <input
+            id="name"
+            type="text"
+            name="name"
+            value={furnitureData.name}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="category">Catégorie</label>
+          <select
+            id="category"
+            name="category"
+            value={furnitureData.category}
+            onChange={handleChange}
+          >
+            {catLoading && <option>Loading categories...</option>}
+            {catError && <option>Error loading categories</option>}
 
-        <div className="form-group login-form container">
+            {categories && (
+              <>
+                <option value="" disabled selected>
+                  Sélectionner une catégorie
+                </option>
+                {categories.map((category) => (
+                  <option key={category.id} value={category.id}>
+                    {category.name}
+                  </option>
+                ))}
+              </>
+            )}
+          </select>
+        </div>
+
+        <div className="form-group  ">
           <label htmlFor="materials">Matériaux</label>
           {materialsLoading && <p>Loading materials...</p>}
           {materialsError && <p>Error loading materials</p>}
@@ -100,32 +128,6 @@ const NewFurniture = () => {
                 )}
               </div>
             ))}
-        </div>
-
-        <div className="form-group login-form container">
-          <label htmlFor="category">Catégorie</label>
-          <select
-            id="category"
-            name="category"
-            value={furnitureData.category}
-            onChange={handleChange}
-          >
-            {catLoading && <option>Loading categories...</option>}
-            {catError && <option>Error loading categories</option>}
-
-            {categories && (
-              <>
-                <option value="" disabled selected>
-                  Sélectionner une catégorie
-                </option>
-                {categories.map((category) => (
-                  <option key={category.id} value={category.id}>
-                    {category.name}
-                  </option>
-                ))}
-              </>
-            )}
-          </select>
         </div>
       </div>
       <button type="submit">Ajouter</button>

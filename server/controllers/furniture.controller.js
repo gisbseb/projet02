@@ -41,12 +41,12 @@ const createFurniture = async (req, res) => {
         },
         { transaction: t }
       );
-      materials.forEach(async (materialId) => {
+      for (const materialId of materials) {
         const foundMaterial = await Material.findByPk(materialId, {
           transaction: t,
         });
 
-        if (foundMaterial.stock > 0) {
+        if (foundMaterial && foundMaterial.stock > 0) {
           await Material.update(
             { stock: foundMaterial.stock - 1 },
             {
@@ -63,12 +63,14 @@ const createFurniture = async (req, res) => {
             { transaction: t }
           );
         } else {
-          throw new Error();
+          throw new Error(
+            `No stock available for Material with id ${materialId}`
+          );
         }
-      });
+      }
     });
 
-    return res.status(200).json({ message: "Meuble ajouter", result });
+    return res.status(200).json({ message: "Meuble ajouter" });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: "Une erreur est survenue" });

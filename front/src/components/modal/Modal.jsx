@@ -1,8 +1,17 @@
-export const Modal = ({ setIsOpen, children }) => {
+import "./modal.scss";
+export const Modal = ({ isOpen, setIsOpen, children }) => {
   return (
-    <div className="modal">
-      <button onClick={() => setIsOpen(false)}> close</button>
-      <div className="container">{children}</div>
-    </div>
+    <>
+      {isOpen && (
+        <div className="modal">
+          <div className="container">
+            <button className="close-modal" onClick={() => setIsOpen(false)}>
+              <span>+</span>
+            </button>
+            {children}
+          </div>
+        </div>
+      )}
+    </>
   );
 };

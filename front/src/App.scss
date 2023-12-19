@@ -30,8 +30,16 @@ button {
   padding: 1em;
   background: white;
   width: fit-content;
+  height: fit-content;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
   border-radius: 2px;
+  animation: containerSlideIn 0.3s;
+}
+
+@keyframes containerSlideIn {
+  0% {
+    opacity: 0.2;
+  }
 }
 h1 {
   font-size: 1.4em;
@@ -71,4 +79,18 @@ input {
   box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.15);
   padding: 0.5em 1em;
   border-radius: 2px;
+}
+
+.add {
+  background: black;
+  aspect-ratio: 1/1;
+  display: block;
+  color: white;
+  height: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 0;
+  margin: auto;
+  font-size: 1.2em;
 }

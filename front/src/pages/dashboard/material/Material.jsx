@@ -1,11 +1,14 @@
 import { useEffect } from "react";
 import useFetch from "../../../hooks/useFetch";
 const Material = ({ pageTitle, currentPage }) => {
-  const { data, loading, error } = useFetch("http://localhost:8000/material");
+  const { data, loading, error, refetch } = useFetch(
+    "http://localhost:8000/material"
+  );
 
   useEffect(() => {
-    console.log(data);
-  }, [data]);
+    refetch("http://localhost:8000/material");
+  }, []);
+
   if (pageTitle != currentPage) return;
   if (loading) return <p>Chargement...</p>;
   if (error) return <p>Erreur lors du chargement des données.</p>;
