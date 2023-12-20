@@ -13,17 +13,31 @@ const Dashboard = () => {
   const switchPage = (newPage) => {
     setCurrentPage(newPage);
   };
+  let content;
+  switch (currentPage) {
+    case "stats":
+      content = <Stats />;
+      break;
+    case "furniture":
+      content = <Furniture />;
+      break;
+    case "company":
+      content = <Company />;
+      break;
+    case "categorie":
+      content = <Categorie />;
+      break;
+    case "material":
+      content = <Material />;
+      break;
+    default:
+      content = <Stats />;
+  }
 
   return (
     <div className="dashboard">
       <Sidebar switchPage={switchPage} currentPage={currentPage} />
-      <div className="content">
-        <Stats currentPage={currentPage} pageTitle="stats" />
-        <Furniture currentPage={currentPage} pageTitle="furniture" />
-        <Company currentPage={currentPage} pageTitle="company" />
-        <Categorie currentPage={currentPage} pageTitle="categorie" />
-        <Material currentPage={currentPage} pageTitle="material" />
-      </div>
+      <div className="content">{content}</div>
     </div>
   );
 };

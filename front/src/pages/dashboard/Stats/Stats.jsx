@@ -2,9 +2,7 @@ import React from "react";
 import MaterialsChart from "./chart/MaterialsChart";
 import FurnitureChart from "./chart/FurnitureChart";
 import "./stats.scss";
-const Stats = ({ currentPage, pageTitle }) => {
-  if (currentPage != pageTitle) return;
-
+const Stats = () => {
   return (
     <div className="stats">
       <MaterialsChart />

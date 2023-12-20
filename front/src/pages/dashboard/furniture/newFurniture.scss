@@ -4,4 +4,20 @@
   max-width: 600px;
   flex-wrap: wrap;
   gap: 1em;
+  align-items: center;
+  justify-content: center;
+}
+.materials-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5em 2em;
+  width: fit-content;
+  margin: auto;
+  p {
+    font-size: 0.8em;
+  }
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
 }

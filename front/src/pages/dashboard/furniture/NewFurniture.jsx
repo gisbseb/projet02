@@ -12,18 +12,22 @@ const NewFurniture = ({ setIsOpen, refetch }) => {
     const { name, value } = e.target;
     setFurnitureData({ ...furnitureData, [name]: value });
   };
-  const handleMaterialChange = (materialId) => {
-    const isSelected = furnitureData.materials.includes(materialId);
+  const handleMaterialChange = (materialId, quantity) => {
+    const existingMaterialIndex = furnitureData.materials.findIndex(
+      (material) => material.id === materialId
+    );
 
-    if (isSelected) {
+    if (existingMaterialIndex !== -1) {
+      const updatedMaterials = [...furnitureData.materials];
+      updatedMaterials[existingMaterialIndex].quantity = quantity;
       setFurnitureData({
         ...furnitureData,
-        materials: furnitureData.materials.filter((id) => id !== materialId),
+        materials: updatedMaterials,
       });
     } else {
       setFurnitureData({
         ...furnitureData,
-        materials: [...furnitureData.materials, materialId],
+        materials: [...furnitureData.materials, { id: materialId, quantity }],
       });
     }
   };
@@ -70,6 +74,7 @@ const NewFurniture = ({ setIsOpen, refetch }) => {
       <div className="newFurniture">
         <div className="form-group  ">
           <label htmlFor="name"> Nom</label>
+          <br />
           <input
             id="name"
             type="text"
@@ -80,6 +85,7 @@ const NewFurniture = ({ setIsOpen, refetch }) => {
         </div>
         <div className="form-group">
           <label htmlFor="category">Catégorie</label>
+          <br />
           <select
             id="category"
             name="category"
@@ -106,33 +112,48 @@ const NewFurniture = ({ setIsOpen, refetch }) => {
 
         <div className="form-group  ">
           <label htmlFor="materials">Matériaux</label>
-          {materialsLoading && <p>Loading materials...</p>}
-          {materialsError && <p>Error loading materials</p>}
-          {materials &&
-            materials.map((material) => (
-              <div key={material.id}>
-                {material.stock === 0 ? (
-                  <p>Aucun {material.name} restant</p>
-                ) : (
-                  <>
-                    <input
-                      type="checkbox"
-                      id={`material-${material.id}`}
-                      name="selectedMaterials"
-                      value={material.id}
-                      checked={furnitureData.materials.includes(material.id)}
-                      onChange={() => handleMaterialChange(material.id)}
-                    />
-                    <label htmlFor={`material-${material.id}`}>
-                      {material.name}
-                    </label>
-                  </>
-                )}
-              </div>
-            ))}
+          <div className="materials-group">
+            {materialsLoading && <p>Loading materials...</p>}
+            {materialsError && <p>Error loading materials</p>}
+
+            {materials &&
+              materials.map((material) => (
+                <div key={material.id}>
+                  {material.stock === 0 ? (
+                    <p>Aucun {material.name} restant</p>
+                  ) : (
+                    <div className="form-group">
+                      <label htmlFor={`material-${material.id}`}>
+                        {material.name}
+                      </label>
+                      <input
+                        type="number" // Change this to a number input
+                        id={`material-${material.id}`}
+                        name={`material-${material.id}`}
+                        value={
+                          furnitureData.materials.find(
+                            (m) => m.id === material.id
+                          )?.quantity || 0
+                        }
+                        min={0}
+                        max={material.stock}
+                        onChange={(e) =>
+                          handleMaterialChange(material.id, e.target.value)
+                        }
+                      />
+                      <p>
+                        Il vous reste {material.stock + " " + material.name}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              ))}
+          </div>
         </div>
       </div>
-      <button type="submit">Ajouter</button>
+      <button className="btn-center" type="submit">
+        Ajouter
+      </button>
     </form>
   );
 };

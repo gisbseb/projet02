@@ -7,7 +7,7 @@ import AdminLayout from "./components/adminLayout";
 import Layout from "./components/layout";
 import Homepage from "./pages/homepage/Homepage";
 import Dashboard from "./pages/dashboard/dashboard/Dashboard";
-import MaterialPage from "./pages/material/Material";
+import MaterialPage from "./pages/material/MaterialPage";
 
 function App() {
   return (
@@ -15,7 +15,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Homepage />} />
-          <Route path="/material/:id" element={<MaterialPage />} />
+          <Route path="/material/:materialId" element={<MaterialPage />} />
           <Route path="connexion" element={<Login />} />
         </Route>
         <Route path="/dashboard" element={<p>Welcome</p>} />

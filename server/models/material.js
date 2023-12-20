@@ -12,6 +12,9 @@ const Material = sequelize.define(
     stock: {
       type: DataTypes.INTEGER,
     },
+    description: {
+      type: DataTypes.STRING,
+    },
   },
 
   { sequelize, modelName: "Material" }

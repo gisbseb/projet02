@@ -40,12 +40,7 @@ const Homepage = () => {
       content = (
         <div className="card-container">
           {filteredData.map((furniture, idx) => (
-            <Card
-              key={idx}
-              data={furniture}
-              filters={filters}
-              handleAddFilters={handleAddFilters}
-            />
+            <Card key={idx} data={furniture} />
           ))}
         </div>
       );
@@ -54,26 +49,7 @@ const Homepage = () => {
     }
   }
 
-  return (
-    <div className="homepage">
-      <div className="filters">
-        {filters &&
-          filters.map((filter, idx) => {
-            return (
-              <div
-                className="filter"
-                key={idx}
-                onClick={() => handleRemoveFilter(filter)}
-              >
-                <span>+</span>
-                {filter}
-              </div>
-            );
-          })}
-      </div>
-      {content}
-    </div>
-  );
+  return <div className="homepage page">{content}</div>;
 };
 
 export default Homepage;

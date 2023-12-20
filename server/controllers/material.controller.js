@@ -1,4 +1,5 @@
 import sequelize from "../bdd/sequelize.js";
+import Categorie from "../models/Categorie.js";
 import Furniture from "../models/Furniture.js";
 import FurnitureMaterial from "../models/FurnitureMaterial.js";
 import Material from "../models/material.js";
@@ -31,28 +32,33 @@ const addMaterials = async (req, res) => {
 
 const getMostUsedMaterial = async (req, res) => {
   try {
-    // const materials = await FurnitureMaterial.findAll();
-
     const materials = await Material.findAll({
-      attributes: [
-        "name",
-        [
-          sequelize.fn("SUM", sequelize.col("Furniture.creationCount")),
-          "usage",
-        ],
-      ],
+      attributes: ["name"],
       include: [
         {
           model: Furniture,
           as: "Furniture",
-          attributes: [],
+          attributes: ["creationCount"],
         },
       ],
-      group: ["name"],
+      group: ["Material.id", "Furniture.id"],
     });
 
-    // console.log(result);
-    res.status(200).json(materials);
+    const data = materials.map((material) => {
+      const name = material.name;
+      const usage = material.Furniture.reduce((total, el) => {
+        return (
+          total +
+          parseInt(el.creationCount) *
+            parseInt(el.Furniture_Material.materialCount)
+        );
+      }, 0);
+
+      return { name, usage };
+    });
+    console.log(data);
+
+    res.status(200).json(data);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
@@ -69,6 +75,15 @@ const getFurnituresByMaterial = async (req, res) => {
       include: [
         {
           model: Furniture,
+
+          include: [
+            {
+              model: Categorie,
+            },
+            {
+              model: Material,
+            },
+          ],
         },
       ],
     });
@@ -77,7 +92,7 @@ const getFurnituresByMaterial = async (req, res) => {
       return res.status(404).json({ error: "Material not found." });
     }
 
-    res.status(200).json({ material });
+    res.status(200).json(material);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });

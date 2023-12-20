@@ -1,9 +1,8 @@
 import useFetch from "../../../hooks/useFetch";
 
-const Company = ({ pageTitle, currentPage }) => {
+const Company = () => {
   const { data, loading, error } = useFetch("http://localhost:8000/company");
 
-  if (pageTitle != currentPage) return;
   if (loading) return <p>Chargement...</p>;
   if (error) return <p>Erreur lors du chargement des données.</p>;
 

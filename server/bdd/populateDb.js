@@ -4,6 +4,18 @@ import Furniture from "../models/Furniture.js";
 import FurnitureMaterial from "../models/FurnitureMaterial.js";
 import User from "../models/User.js";
 import Material from "../models/material.js";
+import { LoremIpsum } from "lorem-ipsum";
+
+const lorem = new LoremIpsum({
+  sentencesPerParagraph: {
+    max: 8,
+    min: 4,
+  },
+  wordsPerSentence: {
+    max: 16,
+    min: 4,
+  },
+});
 
 const userData = {
   username: "admin",
@@ -53,6 +65,7 @@ const populateDb = async () => {
         name: material.name,
         companyId: newCompany.id,
         stock: stock,
+        description: lorem.generateParagraphs(1),
       });
     });
   });
@@ -73,9 +86,11 @@ const populateDb = async () => {
 
     await Promise.all(
       associatedMaterials.map(async (material) => {
+        const randomCount = Math.floor(Math.random() * 4) + 1;
         await FurnitureMaterial.create({
           furnitureId: newFurniture.id,
           materialId: material.id,
+          materialCount: randomCount,
         });
       })
     );

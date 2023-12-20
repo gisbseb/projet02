@@ -1,8 +1,7 @@
 import useFetch from "../../../hooks/useFetch";
-const Categorie = ({ pageTitle, currentPage }) => {
+const Categorie = () => {
   const { data, loading, error } = useFetch("http://localhost:8000/categorie");
 
-  if (pageTitle != currentPage) return;
   if (loading) return <p>Chargement...</p>;
   if (error) return <p>Erreur lors du chargement des données.</p>;
 

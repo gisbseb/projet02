@@ -2,14 +2,13 @@ import { useEffect, useState } from "react";
 import useFetch from "../../../hooks/useFetch";
 import AddMaterial from "./AddMaterial";
 import { Modal } from "../../../components/modal/Modal";
-const Material = ({ pageTitle, currentPage }) => {
+const Material = () => {
   const [isAddMaterialOpen, setIsAddMaterialOpen] = useState(false);
   const [currentMaterial, setCurrentMaterial] = useState();
   const { data, loading, error, refetch } = useFetch(
     "http://localhost:8000/material"
   );
 
-  if (pageTitle != currentPage) return;
   if (loading) return <p>Chargement...</p>;
   if (error) return <p>Erreur lors du chargement des données.</p>;
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import useFetch from "../../../../hooks/useFetch";
 import MyChart from "./MyChart.jsx";
@@ -9,6 +9,9 @@ const MaterialsChart = ({ currentPage, pageTitle }) => {
   const { data, loading, error } = useFetch(
     "http://localhost:8000/material/count"
   );
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
   if (loading) return <p>Chargement...</p>;
   if (error) return <p>Erreur lors du chargement des données.</p>;
 

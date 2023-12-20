@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import "./card.scss";
-const Card = ({ data, handleAddFilters, filters }) => {
+import { Link } from "react-router-dom";
+const Card = ({ data }) => {
   return (
     <div className="container card bg-white">
       <div>
@@ -9,25 +10,17 @@ const Card = ({ data, handleAddFilters, filters }) => {
       <h2>{data.Categorie.name + " " + data.name}</h2>
       <div className="keyword-container">
         {data.Materials.map((material, idx) => {
-          const isMaterialInFilters = filters.includes(material.name);
           return (
-            <span
-              onClick={() => handleAddFilters(material.name)}
+            <Link
+              to={`/material/${material.id}`}
               key={idx}
-              className={`keyword hover-fade ${
-                isMaterialInFilters ? "selected" : ""
-              }`}
+              className={`keyword hover-fade `}
             >
               {material.name}
-            </span>
+            </Link>
           );
         })}
       </div>
-
-      <p>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reiciendis ab
-        numquam veniam eligendi tenetur.
-      </p>
     </div>
   );
 };

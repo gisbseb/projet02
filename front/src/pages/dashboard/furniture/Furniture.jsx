@@ -3,7 +3,7 @@ import NewFurniture from "./NewFurniture";
 import useFetch from "../../../hooks/useFetch";
 import { Modal } from "../../../components/modal/Modal";
 import IncrementFurniture from "./IncrementFurniture";
-const Furniture = ({ pageTitle, currentPage }) => {
+const Furniture = () => {
   const [isAddFurnitureOpen, setIsAddFurnitureOpen] = useState(false);
   const { data, loading, error, refetch } = useFetch(
     "http://localhost:8000/furniture"
@@ -11,7 +11,6 @@ const Furniture = ({ pageTitle, currentPage }) => {
 
   if (loading) return <p>Chargement...</p>;
   if (error) return <p>Erreur lors du chargement des données.</p>;
-  if (pageTitle != currentPage) return;
 
   return (
     <>

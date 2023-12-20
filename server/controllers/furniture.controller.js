@@ -22,7 +22,7 @@ const createFurniture = async (req, res) => {
   try {
     const { name, materials, category } = req.body;
 
-    if (!name || !materials || !category) {
+    if (!name || !materials.length > 0 || !category) {
       return res.status(400).json({ message: "Informations manquante" });
     }
 
@@ -41,14 +41,14 @@ const createFurniture = async (req, res) => {
         },
         { transaction: t }
       );
-      for (const materialId of materials) {
+      for (const { id: materialId, quantity } of materials) {
         const foundMaterial = await Material.findByPk(materialId, {
           transaction: t,
         });
 
-        if (foundMaterial && foundMaterial.stock > 0) {
+        if (foundMaterial && foundMaterial.stock >= quantity) {
           await Material.update(
-            { stock: foundMaterial.stock - 1 },
+            { stock: foundMaterial.stock - quantity },
             {
               where: { id: materialId },
               transaction: t,
