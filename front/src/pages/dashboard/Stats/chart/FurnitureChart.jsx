@@ -3,9 +3,7 @@ import React from "react";
 import MyChart from "./MyChart";
 import useFetch from "../../../../hooks/useFetch";
 
-const FurnitureChart = ({ currentPage, pageTitle }) => {
-  if (currentPage != pageTitle) return;
-
+const FurnitureChart = () => {
   const { data, loading, error } = useFetch("http://localhost:8000/furniture");
   if (loading) return <p>Chargement...</p>;
   if (error) return <p>Erreur lors du chargement des données.</p>;

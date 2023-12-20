@@ -3,9 +3,7 @@ import React, { useEffect } from "react";
 import useFetch from "../../../../hooks/useFetch";
 import MyChart from "./MyChart.jsx";
 
-const MaterialsChart = ({ currentPage, pageTitle }) => {
-  if (currentPage != pageTitle) return;
-
+const MaterialsChart = () => {
   const { data, loading, error } = useFetch(
     "http://localhost:8000/material/count"
   );

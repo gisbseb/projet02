@@ -9,6 +9,7 @@ const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PWD, {
   host: DB_HOST,
   port: DB_PORT,
   dialect: "mysql",
+  logging: false,
 });
 
 export default sequelize;

@@ -42,7 +42,11 @@ const Furniture = () => {
                 <td>{el.name}</td>
                 <td>{el.creationCount}</td>
                 <td>
-                  <IncrementFurniture furnitureId={el.id} refetch={refetch} />
+                  <IncrementFurniture
+                    furnitureId={el.id}
+                    refetch={refetch}
+                    materials={el.Materials}
+                  />
                 </td>
               </tr>
             ))}

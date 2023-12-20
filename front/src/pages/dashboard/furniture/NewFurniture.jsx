@@ -45,12 +45,12 @@ const NewFurniture = ({ setIsOpen, refetch }) => {
       });
 
       if (!response.ok) {
-        throw new Error("Failed to create a new material");
+        throw new Error("err");
       }
 
-      console.log("Material created successfully");
+      console.log("ok");
     } catch (error) {
-      console.error("Error creating material:", error.message);
+      console.error(error.message);
     }
     refetch();
     setIsOpen(false);

@@ -1,6 +1,8 @@
+import { Sequelize } from "sequelize";
 import sequelize from "../bdd/sequelize.js";
 import Categorie from "../models/Categorie.js";
 import Furniture from "../models/Furniture.js";
+
 import FurnitureMaterial from "../models/FurnitureMaterial.js";
 import Material from "../models/material.js";
 
@@ -59,13 +61,12 @@ const createFurniture = async (req, res) => {
             {
               furnitureId: newFurniture.id,
               materialId: materialId,
+              materialCount: quantity,
             },
             { transaction: t }
           );
         } else {
-          throw new Error(
-            `No stock available for Material with id ${materialId}`
-          );
+          throw new Error(`Plus de stock ${materialId}`);
         }
       }
     });
@@ -77,7 +78,70 @@ const createFurniture = async (req, res) => {
   }
 };
 
+const incrementFurniture = async (req, res) => {
+  const { id } = req.body;
+
+  try {
+    const foundFurniture = await Furniture.findByPk(id);
+
+    if (!foundFurniture) {
+      return res.status(403).json({ message: "Meuble introuvable" });
+    }
+
+    await sequelize.transaction(async (t) => {
+      await foundFurniture.update(
+        { creationCount: foundFurniture.creationCount + 1 },
+        { transaction: t }
+      );
+
+      const materials = await foundFurniture.getMaterials();
+
+      for (const material of materials) {
+        const newStock =
+          material.stock - material.Furniture_Material.materialCount;
+
+        if (newStock >= 0) {
+          await material.update({ stock: newStock }, { transaction: t });
+        } else {
+          throw new Error(`Matériel manquant: ${material.name}`);
+        }
+      }
+    });
+
+    res.status(200).json({ message: "Meuble ajouté" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Erreur serveur" });
+  }
+};
+
+const getFurnitureByCat = async (req, res) => {
+  console.log("ok");
+
+  try {
+    const furnituresByCat = await Furniture.findAll({
+      attributes: [
+        [sequelize.fn("COUNT", sequelize.col("Categorie.id")), "count"],
+        [sequelize.literal("MAX(`Categorie`.`name`)"), "name"],
+      ],
+      include: [
+        {
+          model: Categorie,
+          attributes: [],
+        },
+      ],
+      group: ["Categorie.id"],
+    });
+
+    return res.status(200).json(furnituresByCat);
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ message: "erreur serveur", err });
+  }
+};
 export default {
   getFurnitures,
   createFurniture,
+  incrementFurniture,
+  getFurnitureByCat,
 };

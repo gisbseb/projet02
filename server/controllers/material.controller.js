@@ -56,7 +56,6 @@ const getMostUsedMaterial = async (req, res) => {
 
       return { name, usage };
     });
-    console.log(data);
 
     res.status(200).json(data);
   } catch (error) {
