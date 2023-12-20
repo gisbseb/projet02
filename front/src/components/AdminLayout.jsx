@@ -1,11 +1,11 @@
 import { Outlet } from "react-router-dom";
 import "./layout.scss";
-import AdminNavbar from "./navbar/AdminNavbar";
+import Navbar from "./navbar/Navbar";
 
 const AdminLayout = () => {
   return (
     <>
-      <AdminNavbar />
+      <Navbar />
       <div className="admin-layout">
         <Outlet />
       </div>

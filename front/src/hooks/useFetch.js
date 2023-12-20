@@ -8,7 +8,9 @@ const useFetch = (url) => {
   const fetchData = useCallback(async () => {
     try {
       setLoading(true);
-      const response = await fetch(url);
+      const response = await fetch(url, {
+        credentials: "include",
+      });
       const result = await response.json();
       setData(result);
     } catch (error) {

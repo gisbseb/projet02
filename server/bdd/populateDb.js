@@ -5,7 +5,11 @@ import FurnitureMaterial from "../models/FurnitureMaterial.js";
 import User from "../models/User.js";
 import Material from "../models/material.js";
 import { LoremIpsum } from "lorem-ipsum";
+import bcrypt from "bcrypt";
+import dotenv from "dotenv";
+dotenv.config();
 
+const { SALT_ROUND } = process.env;
 const lorem = new LoremIpsum({
   sentencesPerParagraph: {
     max: 8,
@@ -38,19 +42,64 @@ const companyData = [
 const categoriesData = [{ name: "Armoire" }, { name: "Etagère" }];
 
 const furnituresData = [
-  { categorieId: 1, name: "Bella", creationCount: 3 },
-  { categorieId: 2, name: "Cascade", creationCount: 5 },
-  { categorieId: 1, name: "Luna", creationCount: 6 },
-  { categorieId: 2, name: "Éclipse", creationCount: 2 },
-  { categorieId: 1, name: "Royale", creationCount: 1 },
-  { categorieId: 2, name: "Horizon", creationCount: 8 },
-  { categorieId: 1, name: "Solstice", creationCount: 9 },
-  { categorieId: 2, name: "Enchantée", creationCount: 11 },
-  { categorieId: 1, name: "Élégance", creationCount: 5 },
-  { categorieId: 2, name: "Prismatique", creationCount: 7 },
+  { categorieId: 1, name: "Bella", creationCount: 3, filename: "armoire.jpg" },
+  {
+    categorieId: 1,
+    name: "Cascade",
+    creationCount: 5,
+    filename: "armoire.jpg",
+  },
+  { categorieId: 1, name: "Luna", creationCount: 6, filename: "armoire3.jpg" },
+  {
+    categorieId: 2,
+    name: "Éclipse",
+    creationCount: 2,
+    filename: "etagere.jpg",
+  },
+  {
+    categorieId: 1,
+    name: "Royale",
+    creationCount: 1,
+    filename: "armoire2.jpg",
+  },
+  {
+    categorieId: 2,
+    name: "Horizon",
+    creationCount: 8,
+    filename: "etagere3.jpg",
+  },
+  {
+    categorieId: 1,
+    name: "Solstice",
+    creationCount: 9,
+    filename: "armoire.jpg",
+  },
+  {
+    categorieId: 1,
+    name: "Enchantée",
+    creationCount: 11,
+    filename: "armoire2.jpg",
+  },
+  {
+    categorieId: 1,
+    name: "Élégance",
+    creationCount: 5,
+    filename: "armoire3.jpg",
+  },
+  {
+    categorieId: 2,
+    name: "Prismatique",
+    creationCount: 7,
+    filename: "etagere2.jpg",
+  },
 ];
 
 const populateDb = async () => {
+  userData.password = await bcrypt.hash(
+    userData.password,
+    parseInt(SALT_ROUND)
+  );
+
   const newUser = await User.create(userData);
 
   companyData.forEach(async (company) => {
@@ -59,7 +108,7 @@ const populateDb = async () => {
     });
 
     company.materials.forEach(async (material) => {
-      const stock = Math.floor(Math.random() * 20) + 1;
+      const stock = Math.floor(Math.random() * 10) + 1;
 
       const newMaterial = await Material.create({
         name: material.name,

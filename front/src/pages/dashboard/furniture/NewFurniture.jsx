@@ -42,6 +42,7 @@ const NewFurniture = ({ setIsOpen, refetch }) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ ...furnitureData }),
+        credentials: "include",
       });
 
       if (!response.ok) {
@@ -119,33 +120,27 @@ const NewFurniture = ({ setIsOpen, refetch }) => {
             {materials &&
               materials.map((material) => (
                 <div key={material.id}>
-                  {material.stock === 0 ? (
-                    <p>Aucun {material.name} restant</p>
-                  ) : (
-                    <div className="form-group">
-                      <label htmlFor={`material-${material.id}`}>
-                        {material.name}
-                      </label>
-                      <input
-                        type="number" // Change this to a number input
-                        id={`material-${material.id}`}
-                        name={`material-${material.id}`}
-                        value={
-                          furnitureData.materials.find(
-                            (m) => m.id === material.id
-                          )?.quantity || 0
-                        }
-                        min={0}
-                        max={material.stock}
-                        onChange={(e) =>
-                          handleMaterialChange(material.id, e.target.value)
-                        }
-                      />
-                      <p>
-                        Il vous reste {material.stock + " " + material.name}
-                      </p>
-                    </div>
-                  )}
+                  <div className="form-group">
+                    <label htmlFor={`material-${material.id}`}>
+                      {material.name}
+                    </label>
+                    <input
+                      type="number" // Change this to a number input
+                      id={`material-${material.id}`}
+                      name={`material-${material.id}`}
+                      value={
+                        furnitureData.materials.find(
+                          (m) => m.id === material.id
+                        )?.quantity || 0
+                      }
+                      min={0}
+                      max={material.stock}
+                      onChange={(e) =>
+                        handleMaterialChange(material.id, e.target.value)
+                      }
+                    />
+                    <p>Il vous reste {material.stock + " " + material.name}</p>
+                  </div>
                 </div>
               ))}
           </div>

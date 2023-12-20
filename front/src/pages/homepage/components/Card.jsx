@@ -5,7 +5,10 @@ const Card = ({ data }) => {
   return (
     <div className="container card bg-white">
       <div>
-        <div className="card-img">Img</div>
+        <img
+          className="card-img"
+          src={`http://localhost:8000/images/${data.filename}`}
+        />
       </div>
       <h2>{data.Categorie.name + " " + data.name}</h2>
       <div className="keyword-container">

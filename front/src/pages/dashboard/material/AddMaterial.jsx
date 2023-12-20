@@ -16,6 +16,7 @@ const AddMaterial = ({ material, setIsOpen, refetch }) => {
           materialId: material.id,
           count: materialToAdd,
         }),
+        credentials: "include",
       });
 
       if (!response.ok) {

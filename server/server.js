@@ -6,6 +6,9 @@ import Categorie from "./models/Categorie.js";
 import cors from "cors";
 import populateDb from "./bdd/populateDb.js";
 import router from "./router/router.js";
+import { join } from "node:path";
+import cookieParser from "cookie-parser";
+
 dotenv.config();
 
 const app = express();
@@ -51,6 +54,10 @@ async function testConnection() {
   }
 }
 testConnection();
+
+const imagesPath = join(process.cwd(), "public", "images");
+app.use(cookieParser());
+app.use("/images", express.static(imagesPath));
 app.use(express.json());
 app.use(
   cors({
@@ -59,6 +66,7 @@ app.use(
   })
 );
 app.use(router);
+
 app.listen(APP_PORT, () => {
   console.log(`server starter: http://${APP_HOST}:${APP_PORT}`);
 });

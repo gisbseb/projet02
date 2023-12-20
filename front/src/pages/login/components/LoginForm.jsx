@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./LoginForm.scss";
 import { useNavigate } from "react-router-dom";
-const LoginForm = () => {
+const LoginForm = ({ handleLogin }) => {
   const [formData, setFormData] = useState({ username: "", password: "" });
 
   const navigate = useNavigate();
@@ -12,7 +12,7 @@ const LoginForm = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate("/dashboard");
+    handleLogin(formData);
   };
 
   return (

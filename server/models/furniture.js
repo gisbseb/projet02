@@ -9,6 +9,9 @@ const Furniture = sequelize.define(
       allowNull: false,
       unique: true,
     },
+    filename: {
+      type: DataTypes.STRING,
+    },
     creationCount: {
       type: DataTypes.INTEGER,
     },

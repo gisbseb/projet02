@@ -1,8 +1,10 @@
 import { NavLink } from "react-router-dom";
 import "./Navbar.scss";
-const logoUrl = "src/assets/logo.png";
+import { useAuth } from "../../context/AuthContext";
+const logoUrl = "./src/assets/logo.png";
 
 const Navbar = () => {
+  const { isAuthenticated, setIsAuthenticated, logout } = useAuth();
   return (
     <nav className="navbar bg-white">
       <div>
@@ -11,9 +13,20 @@ const Navbar = () => {
         </NavLink>
       </div>
       <ul>
-        <li className="hover-fade">
-          <NavLink to={"connexion"}>Connexion</NavLink>
-        </li>
+        {!isAuthenticated ? (
+          <li className="hover-fade">
+            <NavLink to={"/connexion"}>Connexion</NavLink>
+          </li>
+        ) : (
+          <>
+            <li className="hover-fade">
+              <NavLink to={"/dashboard"}>Dashboard</NavLink>
+            </li>
+            <li className="hover-fade" onClick={logout}>
+              Déconnexion
+            </li>
+          </>
+        )}
       </ul>
     </nav>
   );

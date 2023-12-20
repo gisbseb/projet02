@@ -24,7 +24,6 @@ const MyChart = ({ data, chartId, label, getLabel, getValue, chartType }) => {
         labels: labels,
         datasets: [
           {
-            label: label,
             data: values,
           },
         ],

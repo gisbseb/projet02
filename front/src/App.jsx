@@ -8,6 +8,7 @@ import Layout from "./components/layout";
 import Homepage from "./pages/homepage/Homepage";
 import Dashboard from "./pages/dashboard/dashboard/Dashboard";
 import MaterialPage from "./pages/material/MaterialPage";
+import { ProtectedRoute } from "./components/ProtectedRoute/ProtectedRoute";
 
 function App() {
   return (
@@ -20,7 +21,14 @@ function App() {
         </Route>
         <Route path="/dashboard" element={<p>Welcome</p>} />
 
-        <Route path="/dashboard" element={<AdminLayout />}>
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <AdminLayout />
+            </ProtectedRoute>
+          }
+        >
           <Route index element={<Dashboard />} />
         </Route>
       </Routes>

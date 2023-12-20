@@ -21,6 +21,7 @@ const getFurnitures = async (req, res) => {
 };
 
 const createFurniture = async (req, res) => {
+  console.log("ici");
   try {
     const { name, materials, category } = req.body;
 
@@ -116,8 +117,6 @@ const incrementFurniture = async (req, res) => {
 };
 
 const getFurnitureByCat = async (req, res) => {
-  console.log("ok");
-
   try {
     const furnituresByCat = await Furniture.findAll({
       attributes: [

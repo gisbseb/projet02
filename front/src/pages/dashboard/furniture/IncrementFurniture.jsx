@@ -11,6 +11,7 @@ const IncrementFurniture = ({ furnitureId, refetch, materials }) => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({ id: furnitureId }),
+          credentials: "include",
         }
       );
 
