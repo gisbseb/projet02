@@ -21,18 +21,21 @@ const getFurnitures = async (req, res) => {
 };
 
 const createFurniture = async (req, res) => {
-  console.log("ici");
   try {
     const { name, materials, category } = req.body;
 
     if (!name || !materials.length > 0 || !category) {
-      return res.status(400).json({ message: "Informations manquante" });
+      return res
+        .status(400)
+        .json({ message: "Informations manquante", className: "error" });
     }
 
     const foundFurniture = await Furniture.findOne({ where: { name: name } });
 
     if (foundFurniture) {
-      return res.status(400).json({ message: "Le meuble existe déja" });
+      return res
+        .status(400)
+        .json({ message: "Le meuble existe déja", className: "error" });
     }
 
     const result = await sequelize.transaction(async (t) => {
@@ -72,10 +75,13 @@ const createFurniture = async (req, res) => {
       }
     });
 
-    return res.status(200).json({ message: "Meuble ajouter" });
+    return res
+      .status(200)
+      .json({ message: `${name} ajouté`, className: "success" });
   } catch (error) {
-    console.error(error);
-    return res.status(500).json({ message: "Une erreur est survenue" });
+    return res
+      .status(500)
+      .json({ message: "Une erreur est survenue", className: "error" });
   }
 };
 
@@ -86,7 +92,9 @@ const incrementFurniture = async (req, res) => {
     const foundFurniture = await Furniture.findByPk(id);
 
     if (!foundFurniture) {
-      return res.status(403).json({ message: "Meuble introuvable" });
+      return res
+        .status(403)
+        .json({ message: "Meuble introuvable", className: "error" });
     }
 
     await sequelize.transaction(async (t) => {
@@ -109,10 +117,12 @@ const incrementFurniture = async (req, res) => {
       }
     });
 
-    res.status(200).json({ message: "Meuble ajouté" });
+    res
+      .status(200)
+      .json({ message: `${foundFurniture.name} ajouté`, className: "success" });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: "Erreur serveur" });
+    res.status(500).json({ message: "Erreur serveur", className: "error" });
   }
 };
 

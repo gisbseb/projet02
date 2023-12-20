@@ -13,7 +13,9 @@ const addMaterials = async (req, res) => {
   const { materialId, count } = req.body;
 
   if (!materialId || parseInt(count) < 1) {
-    return res.status(400).json({ message: "informations invalide" });
+    return res
+      .status(400)
+      .json({ message: "informations invalide", className: "error" });
   }
 
   try {
@@ -24,9 +26,12 @@ const addMaterials = async (req, res) => {
         where: { id: materialId },
       }
     );
-    res.status(200).json({ message: `${count} ${foundMaterial.name} ajouté` });
+    res.status(200).json({
+      message: `${count} ${foundMaterial.name} ajouté`,
+      className: "success",
+    });
   } catch (err) {
-    res.status(500).json({ message: "Erreur serveur" });
+    res.status(500).json({ message: "Erreur serveur", className: "error" });
   }
 };
 

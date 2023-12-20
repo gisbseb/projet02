@@ -14,11 +14,15 @@ const login = async (req, res) => {
       },
     });
     if (!foundUser) {
-      return res.status(403).json({ message: "identifiants invalide" });
+      return res
+        .status(403)
+        .json({ message: "identifiants invalide", className: "error" });
     }
     const pwdMatch = await bcrypt.compare(password, foundUser.password);
     if (!pwdMatch) {
-      return res.status(403).json({ message: "identifiants invalide" });
+      return res
+        .status(403)
+        .json({ message: "identifiants invalide", className: "error" });
     }
 
     const token = jwt.sign({ username: foundUser.username }, TOKEN_SECRET, {
@@ -26,9 +30,16 @@ const login = async (req, res) => {
     });
 
     res.cookie("token", token, { httpOnly: true, secure: true });
-    return res.status(200).json({ message: "Connexion réussie" });
+    return res
+      .status(200)
+      .json({
+        message: `Bienvenue ${foundUser.username}`,
+        className: "success",
+      });
   } catch (err) {
-    return res.status(500).json({ message: "erreur serveur", err });
+    return res
+      .status(500)
+      .json({ message: "erreur serveur", className: "error", err });
   }
 };
 

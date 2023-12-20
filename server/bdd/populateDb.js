@@ -128,13 +128,15 @@ const populateDb = async () => {
 
     const allMaterials = await Material.findAll();
 
-    const associatedMaterials = allMaterials.slice(
+    const materialCount = Math.floor(Math.random() * (4 - 1 + 1)) + 1;
+
+    const shuffledMaterials = shuffleArray(allMaterials).slice(
       0,
-      Math.floor(Math.random() * allMaterials.length) + 1
+      materialCount
     );
 
     await Promise.all(
-      associatedMaterials.map(async (material) => {
+      shuffledMaterials.map(async (material) => {
         const randomCount = Math.floor(Math.random() * 4) + 1;
         await FurnitureMaterial.create({
           furnitureId: newFurniture.id,
@@ -145,5 +147,11 @@ const populateDb = async () => {
     );
   });
 };
-
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
 export default populateDb;
