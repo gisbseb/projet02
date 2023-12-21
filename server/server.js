@@ -43,9 +43,9 @@ async function testConnection() {
       error.name === "SequelizeConnectionError" &&
       error.parent.code === "ER_BAD_DB_ERROR"
     ) {
-      console.log(`Creating the database '${DB_NAME}'...`);
+      console.log(`Creating the database ...`);
       await createDatabase();
-      console.log("Database created. Retrying connection...");
+      console.log("Database created.");
 
       await testConnection();
     } else {
