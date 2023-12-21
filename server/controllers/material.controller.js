@@ -71,7 +71,7 @@ const getMostUsedMaterial = async (req, res) => {
 const getFurnituresByMaterial = async (req, res) => {
   try {
     const { id } = req.params;
-    console.log(id);
+
     if (!parseInt(id)) {
       return res.status(400).json({ error: "erreur" });
     }

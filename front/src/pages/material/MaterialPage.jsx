@@ -2,7 +2,8 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
 import "./MaterialPage.scss";
-import Card from "../homepage/components/Card";
+import Card from "../../components/card/Card";
+
 const MaterialPage = () => {
   const { materialId } = useParams();
 
@@ -11,10 +12,6 @@ const MaterialPage = () => {
     loading,
     error,
   } = useFetch(`http://localhost:8000/material/${materialId}`);
-
-  useEffect(() => {
-    console.log(material);
-  }, [material]);
 
   if (loading) return <p>Chargement...</p>;
   if (error) return <p>Erreur lors du chargement des données.</p>;

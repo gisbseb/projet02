@@ -27,7 +27,7 @@ async function createDatabase() {
     console.log(`Database '${DB_NAME}' created or already exists.`);
     await connection.end();
   } catch (error) {
-    console.error("Error creating database:", error);
+    console.error("Error creating database:");
   }
 }
 async function testConnection() {
@@ -37,7 +37,7 @@ async function testConnection() {
 
     await sequelize.sync({ force: true });
     populateDb();
-    console.log("Database synchronized");
+    console.log("Database sync");
   } catch (error) {
     if (
       error.name === "SequelizeConnectionError" &&

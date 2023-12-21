@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import "./card.scss";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 const Card = ({ data }) => {
   return (
     <div className="container card bg-white">
@@ -14,13 +14,13 @@ const Card = ({ data }) => {
       <div className="keyword-container">
         {data.Materials.map((material, idx) => {
           return (
-            <Link
+            <NavLink
               to={`/material/${material.id}`}
               key={idx}
               className={`keyword hover-fade `}
             >
               {material.name}
-            </Link>
+            </NavLink>
           );
         })}
       </div>
