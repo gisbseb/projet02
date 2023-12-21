@@ -3,7 +3,7 @@ import { Modal } from "../../../components/modal/Modal";
 import useFetch from "../../../hooks/useFetch";
 import { useSnackbar } from "../../../context/SnackBarContext";
 
-const EditFurniture = ({ furniture }) => {
+const EditFurniture = ({ furniture, refetch, categories }) => {
   const { addSnackbar } = useSnackbar();
   const [isEditFurnitureOpen, setIsEditFurnitureOpen] = useState(false);
 
@@ -18,11 +18,7 @@ const EditFurniture = ({ furniture }) => {
   useEffect(() => {
     console.log(furniture);
   }, [furniture]);
-  const {
-    data: categories,
-    loading: catLoading,
-    error: catError,
-  } = useFetch("http://localhost:8000/categorie", { credentials: "include" });
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFurnitureData({ ...furnitureData, [name]: value });
@@ -65,6 +61,7 @@ const EditFurniture = ({ furniture }) => {
     } catch (err) {
       console.log(err);
     }
+    refetch();
     setIsEditFurnitureOpen(false);
   };
 
@@ -95,25 +92,20 @@ const EditFurniture = ({ furniture }) => {
                 value={furnitureData.category}
                 onChange={handleChange}
               >
-                {catLoading && <option>Loading categories...</option>}
-                {catError && <option>Error loading categories</option>}
-
-                {categories && (
-                  <>
-                    <option value="" disabled>
-                      Sélectionner une catégorie
+                <>
+                  <option value="" disabled>
+                    Sélectionner une catégorie
+                  </option>
+                  {categories.map((category) => (
+                    <option
+                      key={category.id}
+                      value={category.id}
+                      selected={category.id === furnitureData.category}
+                    >
+                      {category.name}
                     </option>
-                    {categories.map((category) => (
-                      <option
-                        key={category.id}
-                        value={category.id}
-                        selected={category.id === furnitureData.category}
-                      >
-                        {category.name}
-                      </option>
-                    ))}
-                  </>
-                )}
+                  ))}
+                </>
               </select>
             </div>
             <div className="form-group img-group container">

@@ -11,6 +11,11 @@ const Furniture = () => {
     "http://localhost:8000/furniture"
   );
 
+  const {
+    data: categories,
+    loading: catLoading,
+    error: catError,
+  } = useFetch("http://localhost:8000/categorie", { credentials: "include" });
   if (loading) return <p>Chargement...</p>;
   if (error) return <p>Erreur lors du chargement des données.</p>;
 
@@ -53,7 +58,13 @@ const Furniture = () => {
                   />
                 </td>
                 <td>
-                  <EditFurniture furniture={el} />
+                  {categories && (
+                    <EditFurniture
+                      furniture={el}
+                      refetch={refetch}
+                      categories={categories}
+                    />
+                  )}
                 </td>
                 <td>
                   <DeleteFurniture furnitureId={el.id} refetch={refetch} />

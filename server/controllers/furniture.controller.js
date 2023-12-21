@@ -228,13 +228,12 @@ const updateFurniture = async (req, res) => {
       req.files.image &&
       foundFurniture.filename != req.files?.image?.name
     ) {
-      console.log("ici on modifie les fichiers");
       const oldFileName = foundFurniture.filename;
       req.files.image.name = "img" + name;
       foundFurniture.filename = "img" + name;
 
       try {
-        if (oldFileName) {
+        if (oldFileName && !/(armoire|etagere)/i.test(oldFileName)) {
           const oldFilePath = join(imagesPath, oldFileName);
           fs.unlinkSync(oldFilePath);
           console.log("delete old file");
