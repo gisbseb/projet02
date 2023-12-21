@@ -25,10 +25,6 @@ const IncrementFurniture = ({ furnitureId, refetch, materials }) => {
     refetch();
   };
 
-  useEffect(() => {
-    console.log(materials);
-  }, [materials]);
-
   const missingMaterials = materials
     .filter(
       (material) => material.stock < material.Furniture_Material.materialCount

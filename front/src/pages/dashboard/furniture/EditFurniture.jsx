@@ -15,10 +15,6 @@ const EditFurniture = ({ furniture, refetch, categories }) => {
   const [image, setImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
 
-  useEffect(() => {
-    console.log(furniture);
-  }, [furniture]);
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFurnitureData({ ...furnitureData, [name]: value });
