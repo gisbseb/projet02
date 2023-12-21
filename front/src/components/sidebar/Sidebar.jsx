@@ -1,11 +1,23 @@
+import { useRef } from "react";
 import "./sidebar.scss";
 const Sidebar = ({ switchPage, currentPage }) => {
+  const sidebarRef = useRef();
+
+  const toggleMenu = (e, page) => {
+    sidebarRef.current.classList.toggle("sidebar-open");
+    if (e.target.className.includes("burger")) return;
+    switchPage(page);
+  };
+
   return (
-    <div className="sidebar bg-white container">
+    <div className="sidebar bg-white container" ref={sidebarRef}>
+      <div className="burger" onClick={toggleMenu}>
+        Menu
+      </div>
       <ul>
         <li
           className={`hover-fade  ${currentPage == "stats" ? "active" : ""}`}
-          onClick={() => switchPage("stats")}
+          onClick={(e) => toggleMenu(e, "stats")}
         >
           Dashboard
         </li>
@@ -14,19 +26,19 @@ const Sidebar = ({ switchPage, currentPage }) => {
           className={`hover-fade  ${
             currentPage == "furniture" ? "active" : ""
           }`}
-          onClick={() => switchPage("furniture")}
+          onClick={(e) => toggleMenu(e, "furniture")}
         >
           Créations
         </li>
         <li
           className={`hover-fade  ${currentPage == "company" ? "active" : ""}`}
-          onClick={() => switchPage("company")}
+          onClick={(e) => toggleMenu(e, "company")}
         >
           Fournisseurs
         </li>
         <li
           className={`hover-fade ${currentPage == "material" ? "active" : ""}`}
-          onClick={() => switchPage("material")}
+          onClick={(e) => toggleMenu(e, "material")}
         >
           Matériaux
         </li>
@@ -34,7 +46,7 @@ const Sidebar = ({ switchPage, currentPage }) => {
           className={`hover-fade  ${
             currentPage == "categorie" ? "active" : ""
           }`}
-          onClick={() => switchPage("categorie")}
+          onClick={(e) => toggleMenu(e, "categorie")}
         >
           Catégories
         </li>

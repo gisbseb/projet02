@@ -10,7 +10,6 @@ const NewFurniture = ({ setIsOpen, refetch }) => {
     category: "",
   });
   // const [image, setImage] = useState(null);
-
   const imageInput = useRef();
 
   const handleChange = (e) => {
@@ -139,7 +138,7 @@ const NewFurniture = ({ setIsOpen, refetch }) => {
                       {material.name}
                     </label>
                     <input
-                      type="number" // Change this to a number input
+                      type="number"
                       id={`material-${material.id}`}
                       name={`material-${material.id}`}
                       value={

@@ -5,7 +5,14 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  const logout = () => {
+  const logout = async () => {
+    try {
+      const response = await fetch("http://localhost:8000/auth/logout", {
+        credentials: "include",
+      });
+    } catch (err) {
+      console.log(err);
+    }
     setIsAuthenticated(false);
   };
 

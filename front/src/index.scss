@@ -23,14 +23,18 @@
 }
 
 :root {
-  font-size: 12px;
+  font-size: 10px;
 }
 
 body {
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   font-family: "Barlow-regular";
 }
-
+@media (max-width: 768px) {
+  body {
+    font-size: 1.2rem;
+  }
+}
 @media (min-width: 1300px) {
   body {
     font-size: 1.6rem;

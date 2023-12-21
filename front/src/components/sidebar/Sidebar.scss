@@ -19,3 +19,26 @@
     pointer-events: none;
   }
 }
+
+.burger {
+  display: none;
+  position: absolute;
+  left: 100%;
+  transform: translateY(-200%);
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    position: absolute;
+    transform: translateX(-100%);
+    transition: transform 0.4s;
+  }
+
+  .sidebar-open {
+    transform: translateX(0%);
+  }
+
+  .burger {
+    display: block;
+  }
+}

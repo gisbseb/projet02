@@ -36,7 +36,7 @@ const companyData = [
     socialReason: "MetaLo",
     materials: [{ name: "acier" }, { name: "inox" }, { name: "aluminium" }],
   },
-  { socialReason: "pPlastique", materials: [{ name: "Plastique" }] },
+  { socialReason: "pPlastique", materials: [{ name: "plastique" }] },
 ];
 
 const categoriesData = [{ name: "Armoire" }, { name: "Etagère" }];
@@ -128,7 +128,7 @@ const populateDb = async () => {
 
     const allMaterials = await Material.findAll();
 
-    const materialCount = Math.floor(Math.random() * (4 - 1 + 1)) + 1;
+    const materialCount = Math.floor(Math.random() * (4 + 1)) + 1;
 
     const shuffledMaterials = shuffleArray(allMaterials).slice(
       0,

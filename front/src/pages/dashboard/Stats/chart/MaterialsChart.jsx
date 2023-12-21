@@ -23,7 +23,7 @@ const MaterialsChart = () => {
       label="Matériaux utilisés"
       getLabel={getMaterialLabel}
       getValue={getMaterialValue}
-      chartType="doughnut"
+      chartType="radar"
     />
   );
 };

@@ -44,7 +44,7 @@ const Material = () => {
                     setIsAddMaterialOpen(true);
                   }}
                 >
-                  Commander
+                  +
                 </button>
               </td>
             </tr>

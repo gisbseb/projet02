@@ -8,5 +8,12 @@ router.get("/", furnitureController.getFurnitures);
 router.post("/", verifyJwt, fileUpload(), furnitureController.createFurniture);
 router.post("/increment", verifyJwt, furnitureController.incrementFurniture);
 router.get("/categorie", verifyJwt, furnitureController.getFurnitureByCat);
+router.delete("/:id", verifyJwt, furnitureController.deleteFurniture);
+router.patch(
+  "/:id",
+  verifyJwt,
+  fileUpload(),
+  furnitureController.updateFurniture
+);
 
 export default router;

@@ -9,6 +9,7 @@ import Homepage from "./pages/homepage/Homepage";
 import Dashboard from "./pages/dashboard/dashboard/Dashboard";
 import MaterialPage from "./pages/material/MaterialPage";
 import { ProtectedRoute } from "./components/ProtectedRoute/ProtectedRoute";
+import { NotFound } from "./pages/notfound/NotFound";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
         >
           <Route index element={<Dashboard />} />
         </Route>
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   );

@@ -1,6 +1,6 @@
 .navbar {
   width: 100%;
-
+  flex-wrap: wrap;
   padding: 0.5em 1em;
   display: flex;
   justify-content: space-between;
@@ -17,10 +17,12 @@
 }
 
 .active {
-  opacity: 0.5;
+  display: none;
   pointer-events: none;
 }
 
 .active:has(.logo) {
   opacity: 1;
+  display: block;
+  pointer-events: none;
 }

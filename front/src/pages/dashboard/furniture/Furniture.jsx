@@ -3,6 +3,8 @@ import NewFurniture from "./NewFurniture";
 import useFetch from "../../../hooks/useFetch";
 import { Modal } from "../../../components/modal/Modal";
 import IncrementFurniture from "./IncrementFurniture";
+import DeleteFurniture from "./DeleteFurniture";
+import EditFurniture from "./EditFurniture";
 const Furniture = () => {
   const [isAddFurnitureOpen, setIsAddFurnitureOpen] = useState(false);
   const { data, loading, error, refetch } = useFetch(
@@ -33,6 +35,8 @@ const Furniture = () => {
               <th>Nom</th>
               <th>Nombre</th>
               <th>Ajouter</th>
+              <th>Modifier</th>
+              <th>Supprimer</th>
             </tr>
           </thead>
           <tbody>
@@ -47,6 +51,12 @@ const Furniture = () => {
                     refetch={refetch}
                     materials={el.Materials}
                   />
+                </td>
+                <td>
+                  <EditFurniture furniture={el} />
+                </td>
+                <td>
+                  <DeleteFurniture furnitureId={el.id} refetch={refetch} />
                 </td>
               </tr>
             ))}

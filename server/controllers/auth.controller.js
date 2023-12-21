@@ -30,12 +30,10 @@ const login = async (req, res) => {
     });
 
     res.cookie("token", token, { httpOnly: true, secure: true });
-    return res
-      .status(200)
-      .json({
-        message: `Bienvenue ${foundUser.username}`,
-        className: "success",
-      });
+    return res.status(200).json({
+      message: `Bienvenue ${foundUser.username}`,
+      className: "success",
+    });
   } catch (err) {
     return res
       .status(500)
@@ -43,8 +41,12 @@ const login = async (req, res) => {
   }
 };
 
-const logout = () => {
-  res.send("logout");
+const logout = (req, res) => {
+  const { token } = req.cookies;
+  console.log(token);
+  if (!token) return res.sendStatus(204);
+  res.clearCookie("token");
+  res.json({ message: "Cookie nettoyer" });
 };
 
 export default {

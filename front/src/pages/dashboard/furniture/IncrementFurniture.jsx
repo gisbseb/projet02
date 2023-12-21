@@ -44,9 +44,7 @@ const IncrementFurniture = ({ furnitureId, refetch, materials }) => {
   return (
     <>
       {missingMaterials.length === 0 ? (
-        <span onClick={handleIncrement} className="add hover-fade">
-          +
-        </span>
+        <button onClick={handleIncrement}>Ajouter</button>
       ) : (
         missingMaterials
       )}
