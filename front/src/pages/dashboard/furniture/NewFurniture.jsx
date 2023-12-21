@@ -1,17 +1,23 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import useFetch from "../../../hooks/useFetch";
 import "./newFurniture.scss";
+import { useSnackbar } from "../../../context/SnackBarContext";
 const NewFurniture = ({ setIsOpen, refetch }) => {
+  const { addSnackbar } = useSnackbar();
   const [furnitureData, setFurnitureData] = useState({
     name: "",
     materials: [],
     category: "",
   });
+  // const [image, setImage] = useState(null);
+
+  const imageInput = useRef();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFurnitureData({ ...furnitureData, [name]: value });
   };
+
   const handleMaterialChange = (materialId, quantity) => {
     const existingMaterialIndex = furnitureData.materials.findIndex(
       (material) => material.id === materialId
@@ -35,21 +41,21 @@ const NewFurniture = ({ setIsOpen, refetch }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const formData = new FormData();
+    formData.append("image", imageInput.current.files[0]);
+    formData.append("name", furnitureData.name);
+    formData.append("materials", JSON.stringify(furnitureData.materials));
+    formData.append("category", furnitureData.category);
+
     try {
       const response = await fetch("http://localhost:8000/furniture", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ ...furnitureData }),
+        body: formData,
         credentials: "include",
       });
 
-      if (!response.ok) {
-        throw new Error("err");
-      }
-
-      console.log("ok");
+      const responseData = await response.json();
+      addSnackbar(responseData.message, responseData.className);
     } catch (error) {
       console.error(error.message);
     }
@@ -66,10 +72,7 @@ const NewFurniture = ({ setIsOpen, refetch }) => {
     loading: catLoading,
     error: catError,
   } = useFetch("http://localhost:8000/categorie");
-  useEffect(() => {
-    console.log(materials);
-    console.log(categories);
-  }, [materials, categories]);
+
   return (
     <form onSubmit={handleSubmit}>
       <div className="newFurniture">
@@ -110,7 +113,18 @@ const NewFurniture = ({ setIsOpen, refetch }) => {
             )}
           </select>
         </div>
-
+        <div className="form-group">
+          <label htmlFor="file">Image</label>
+          <br />
+          <input
+            ref={imageInput}
+            id="file"
+            name="file"
+            type="file"
+            // value={image}
+            // onChange={(e) => setImage(e.target.value)}
+          />
+        </div>
         <div className="form-group  ">
           <label htmlFor="materials">Matériaux</label>
           <div className="materials-group">

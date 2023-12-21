@@ -18,7 +18,9 @@ const LoginForm = ({ handleLogin }) => {
   return (
     <form className="login-form container bg-white" onSubmit={handleSubmit}>
       <div className="form-group ">
-        <label htmlFor="username">Identifiant :</label>
+        <label htmlFor="username">
+          Identifiant: <span style={{ color: "red" }}>admin</span>
+        </label>
         <input
           id="username"
           name="username"
@@ -28,7 +30,9 @@ const LoginForm = ({ handleLogin }) => {
         />
       </div>
       <div className="form-group">
-        <label htmlFor="password">Mot de passe :</label>
+        <label htmlFor="password">
+          Mot de passe: <span style={{ color: "red" }}>admin</span>
+        </label>
         <input
           id="password"
           name="password"

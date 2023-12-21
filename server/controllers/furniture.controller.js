@@ -5,6 +5,7 @@ import Furniture from "../models/Furniture.js";
 
 import FurnitureMaterial from "../models/FurnitureMaterial.js";
 import Material from "../models/material.js";
+import { join } from "node:path";
 
 const getFurnitures = async (req, res) => {
   const furnitures = await Furniture.findAll({
@@ -21,9 +22,14 @@ const getFurnitures = async (req, res) => {
 };
 
 const createFurniture = async (req, res) => {
-  try {
-    const { name, materials, category } = req.body;
+  const imagesPath = join(process.cwd(), "public", "images");
+  console.log(req.body);
+  const { name, category } = req.body;
+  const { image } = req.files;
+  const materials = JSON.parse(req.body.materials);
+  console.log(materials);
 
+  try {
     if (!name || !materials.length > 0 || !category) {
       return res
         .status(400)
@@ -44,10 +50,14 @@ const createFurniture = async (req, res) => {
           name: name,
           creationCount: 1,
           categorieId: parseInt(category),
+          filename: image.name,
         },
         { transaction: t }
       );
+
+      console.log(materials);
       for (const { id: materialId, quantity } of materials) {
+        console.log(materialId, quantity);
         const foundMaterial = await Material.findByPk(materialId, {
           transaction: t,
         });
@@ -72,6 +82,17 @@ const createFurniture = async (req, res) => {
         } else {
           throw new Error(`Plus de stock ${materialId}`);
         }
+      }
+      try {
+        image.mv(join(imagesPath, image.name), (error) => {
+          if (error) {
+            console.error(error);
+          } else {
+            console.log("file ok");
+          }
+        });
+      } catch (error) {
+        console.error(error);
       }
     });
 

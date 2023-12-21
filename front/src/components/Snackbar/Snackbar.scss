@@ -1,0 +1,55 @@
+$dark-blue: #144e70;
+$red: #ee4266;
+$green: #3bceac;
+.snackbar-container {
+  position: fixed;
+  bottom: 1em;
+  right: 1em;
+  display: grid;
+  pointer-events: none;
+  z-index: 2000000;
+}
+
+.snackbar-item {
+  position: relative;
+  margin-top: 10px; /* Espacement entre les snackbars */
+  background: white;
+  padding: 1em 3em;
+  border: 1px solid $dark-blue;
+  border-radius: 6px;
+  animation-name: snackBar;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+.snackbar-item.success {
+  border: 2px solid $green;
+}
+
+.snackbar-item.error {
+  border: 2px solid $red;
+}
+
+@keyframes snackBar {
+  0% {
+    opacity: 0;
+    transform: translateX(
+      100%
+    ); /* Optionnel : ajoute une animation de glissement vers le haut */
+  }
+  10% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  90% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    display: none;
+    transform: translateX(
+      100%
+    ); /* Optionnel : ajoute une animation de glissement vers le haut */
+  }
+}

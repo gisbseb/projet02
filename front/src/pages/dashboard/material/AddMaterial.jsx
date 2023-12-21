@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
+import { useSnackbar } from "../../../context/SnackBarContext";
 
 const AddMaterial = ({ material, setIsOpen, refetch }) => {
   const [materialToAdd, setMaterialToAdd] = useState(0);
-
+  const { addSnackbar } = useSnackbar();
   const addMaterial = async (e) => {
     e.preventDefault();
 
@@ -19,11 +20,8 @@ const AddMaterial = ({ material, setIsOpen, refetch }) => {
         credentials: "include",
       });
 
-      if (!response.ok) {
-        throw new Error("Failed to create a new material");
-      }
-
-      console.log("Material created successfully");
+      const responseData = await response.json();
+      addSnackbar(responseData.message, responseData.className);
     } catch (error) {
       console.error("Error creating material:", error.message);
     }

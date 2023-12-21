@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
-
+import "./MaterialPage.scss";
 import Card from "../homepage/components/Card";
 const MaterialPage = () => {
   const { materialId } = useParams();
@@ -27,7 +27,6 @@ const MaterialPage = () => {
       </section>
       <section className="card-container">
         {material.Furniture.map((el, idx) => {
-          console.log(el);
           return <Card key={idx} data={el} />;
         })}
       </section>

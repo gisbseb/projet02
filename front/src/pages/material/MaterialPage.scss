@@ -1,0 +1,9 @@
+.single-material {
+  animation: singleMat 1s;
+}
+
+@keyframes singleMat {
+  0% {
+    opacity: 0.2;
+  }
+}

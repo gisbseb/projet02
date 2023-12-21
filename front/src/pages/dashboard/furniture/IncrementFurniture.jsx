@@ -1,6 +1,8 @@
 import { useEffect } from "react";
+import { useSnackbar } from "../../../context/SnackBarContext";
 
 const IncrementFurniture = ({ furnitureId, refetch, materials }) => {
+  const { addSnackbar } = useSnackbar();
   const handleIncrement = async () => {
     try {
       const response = await fetch(
@@ -14,10 +16,8 @@ const IncrementFurniture = ({ furnitureId, refetch, materials }) => {
           credentials: "include",
         }
       );
-
-      if (!response.ok) {
-        throw new Error("Echec");
-      }
+      const responseData = await response.json();
+      addSnackbar(responseData.message, responseData.className);
     } catch (error) {
       console.error("err:", error.message);
     }

@@ -2,7 +2,10 @@ import LoginForm from "./components/LoginForm";
 import { useAuth } from "../../context/AuthContext";
 import { Navigate, useNavigate } from "react-router-dom";
 
+import { useSnackbar } from "../../context/SnackBarContext";
+
 const Login = () => {
+  const { addSnackbar } = useSnackbar();
   const { setIsAuthenticated, isAuthenticated } = useAuth();
   const navigate = useNavigate();
   const handleLogin = async (data) => {
@@ -15,10 +18,13 @@ const Login = () => {
         body: JSON.stringify(data),
         credentials: "include",
       });
+      const responseData = await response.json();
 
+      addSnackbar(responseData.message, responseData.className);
       if (!response.ok) {
-        throw new Error("err");
+        return;
       }
+
       setIsAuthenticated(true);
     } catch (error) {
       console.error(error.message);
