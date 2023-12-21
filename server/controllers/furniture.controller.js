@@ -214,6 +214,11 @@ const updateFurniture = async (req, res) => {
   const { id } = req.params;
   const { categorie, name } = req.body;
 
+  if (!categorie || !name) {
+    return res
+      .status(400)
+      .json({ message: "Informations manquante", className: "error" });
+  }
   try {
     const isNameTaken = await Furniture.findOne({
       where: {
