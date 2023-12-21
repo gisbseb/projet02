@@ -65,7 +65,7 @@ const getMostUsedMaterial = async (req, res) => {
     res.status(200).json(data);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Internal Server Error" });
+    res.status(500).json({ error: "seveur err" });
   }
 };
 const getFurnituresByMaterial = async (req, res) => {
@@ -73,7 +73,7 @@ const getFurnituresByMaterial = async (req, res) => {
     const { id } = req.params;
     console.log(id);
     if (!parseInt(id)) {
-      return res.status(400).json({ error: "Material ID is required." });
+      return res.status(400).json({ error: "erreur" });
     }
     const material = await Material.findByPk(id, {
       include: [
@@ -93,13 +93,13 @@ const getFurnituresByMaterial = async (req, res) => {
     });
 
     if (!material) {
-      return res.status(404).json({ error: "Material not found." });
+      return res.status(404).json({ error: "materiaux introuvable." });
     }
 
     res.status(200).json(material);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Internal Server Error" });
+    res.status(500).json({ error: "seveur err" });
   }
 };
 export default {

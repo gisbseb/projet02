@@ -26,7 +26,7 @@ const login = async (req, res) => {
     }
 
     const token = jwt.sign({ username: foundUser.username }, TOKEN_SECRET, {
-      expiresIn: "1h",
+      expiresIn: "24h",
     });
 
     res.cookie("token", token, { httpOnly: true, secure: true });
@@ -37,13 +37,13 @@ const login = async (req, res) => {
   } catch (err) {
     return res
       .status(500)
-      .json({ message: "erreur serveur", className: "error", err });
+      .json({ message: "erreur serveur", className: "error" });
   }
 };
 
 const logout = (req, res) => {
   const { token } = req.cookies;
-  console.log(token);
+
   if (!token) return res.sendStatus(204);
   res.clearCookie("token");
   res.json({ message: "Cookie nettoyer" });

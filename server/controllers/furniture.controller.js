@@ -186,7 +186,18 @@ const deleteFurniture = async (req, res) => {
         .status(400)
         .json({ message: "Meuble introuvable", className: "error" });
     }
+
+    //delete image
+    if (
+      foundFurniture.filename &&
+      !/(armoire|etagere)/i.test(foundFurniture.filename)
+    ) {
+      const filePath = join(imagesPath, foundFurniture.filename);
+      fs.unlinkSync(filePath);
+      console.log("delete old file");
+    }
     await foundFurniture.destroy();
+
     return res.status(200).json({
       message: `${foundFurniture.name} supprimer`,
       className: "success",

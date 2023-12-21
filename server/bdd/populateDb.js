@@ -42,7 +42,7 @@ const companyData = [
 const categoriesData = [{ name: "Armoire" }, { name: "Etagère" }];
 
 const furnituresData = [
-  { categorieId: 1, name: "Bella", creationCount: 3, filename: "armoire.jpg" },
+  { categorieId: 1, name: "Bella", creationCount: 3, filename: "armoire4.jpg" },
   {
     categorieId: 1,
     name: "Cascade",
@@ -72,13 +72,13 @@ const furnituresData = [
     categorieId: 1,
     name: "Solstice",
     creationCount: 9,
-    filename: "armoire.jpg",
+    filename: "armoire6.jpg",
   },
   {
     categorieId: 1,
     name: "Enchantée",
     creationCount: 11,
-    filename: "armoire2.jpg",
+    filename: "armoire5.jpg",
   },
   {
     categorieId: 1,
