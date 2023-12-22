@@ -7,4 +7,5 @@ router.get("/", materialController.getMaterials);
 router.get("/count", verifyJwt, materialController.getMostUsedMaterial);
 router.post("/", verifyJwt, materialController.addMaterials);
 router.get("/:id", materialController.getFurnituresByMaterial);
+router.patch("/", materialController.updateMaterial);
 export default router;

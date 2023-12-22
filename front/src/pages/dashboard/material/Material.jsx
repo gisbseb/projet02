@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import useFetch from "../../../hooks/useFetch";
 import AddMaterial from "./AddMaterial";
 import { Modal } from "../../../components/modal/Modal";
+import UpdateMaterial from "./UpdateMaterial";
 const Material = () => {
   const [isAddMaterialOpen, setIsAddMaterialOpen] = useState(false);
+  const [isUpdateMaterialOpen, setIsUpdateMaterialOpen] = useState(false);
   const [currentMaterial, setCurrentMaterial] = useState();
   const { data, loading, error, refetch } = useFetch(
     "http://localhost:8000/material"
@@ -21,6 +23,13 @@ const Material = () => {
           refetch={refetch}
         />
       </Modal>
+      <Modal isOpen={isUpdateMaterialOpen} setIsOpen={setIsUpdateMaterialOpen}>
+        <UpdateMaterial
+          material={currentMaterial}
+          setIsOpen={setIsUpdateMaterialOpen}
+          refetch={refetch}
+        />
+      </Modal>
       <h2>Matériaux</h2>
       <table className="dash-table ">
         <thead>
@@ -29,6 +38,7 @@ const Material = () => {
             <th>Name</th>
             <th>Stock</th>
             <th>Commande</th>
+            <th>Modifier</th>
           </tr>
         </thead>
         <tbody>
@@ -45,6 +55,16 @@ const Material = () => {
                   }}
                 >
                   +
+                </button>
+              </td>
+              <td>
+                <button
+                  onClick={() => {
+                    setCurrentMaterial(el);
+                    setIsUpdateMaterialOpen(true);
+                  }}
+                >
+                  Modifier
                 </button>
               </td>
             </tr>

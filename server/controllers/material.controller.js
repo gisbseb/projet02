@@ -102,9 +102,41 @@ const getFurnituresByMaterial = async (req, res) => {
     res.status(500).json({ error: "seveur err" });
   }
 };
+
+const updateMaterial = async (req, res) => {
+  const { description, materialId: id } = req.body;
+
+  if (!description || !id) {
+    return res
+      .status(400)
+      .json({ message: "Informations manquante", className: "error" });
+  }
+
+  try {
+    const foundMaterial = await Material.findByPk(parseInt(id));
+    if (!foundMaterial) {
+      return res
+        .status(400)
+        .json({ message: "Ressource introuvable", className: "error" });
+    }
+
+    foundMaterial.description = description;
+    foundMaterial.save();
+
+    return res.status(200).json({
+      message: `${foundMaterial.name} mis à jour`,
+      className: "success",
+    });
+  } catch (err) {
+    return res
+      .status(500)
+      .json({ message: "Erreur serveur", className: "error" });
+  }
+};
 export default {
   getMaterials,
   addMaterials,
   getMostUsedMaterial,
   getFurnituresByMaterial,
+  updateMaterial,
 };
