@@ -7,7 +7,7 @@ export const SnackBarProvider = ({ children }) => {
   const [snackBarElements, setSnackBarElements] = useState([]);
 
   const addSnackbar = (message, state, duration = 6000) => {
-    const id = Date.now(); // Create a unique id for each snackbar
+    const id = Date.now();
     setSnackBarElements([
       ...snackBarElements,
       { id, message, state, duration },

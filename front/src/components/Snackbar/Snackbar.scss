@@ -12,7 +12,7 @@ $green: #3bceac;
 
 .snackbar-item {
   position: relative;
-  margin-top: 10px; /* Espacement entre les snackbars */
+  margin-top: 10px;
   background: white;
   padding: 1em 3em;
   border: 1px solid $dark-blue;
@@ -33,9 +33,7 @@ $green: #3bceac;
 @keyframes snackBar {
   0% {
     opacity: 0;
-    transform: translateX(
-      100%
-    ); /* Optionnel : ajoute une animation de glissement vers le haut */
+    transform: translateX(100%);
   }
   10% {
     opacity: 1;
@@ -48,8 +46,6 @@ $green: #3bceac;
   100% {
     opacity: 0;
     display: none;
-    transform: translateX(
-      100%
-    ); /* Optionnel : ajoute une animation de glissement vers le haut */
+    transform: translateX(100%);
   }
 }
