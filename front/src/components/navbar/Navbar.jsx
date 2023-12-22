@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import "./Navbar.scss";
 import { useAuth } from "../../context/AuthContext";
-const logoUrl = "src/assets/logo.png";
+const logoUrl = "../../src/assets/logo.png";
 
 const Navbar = () => {
   const { isAuthenticated, setIsAuthenticated, logout } = useAuth();

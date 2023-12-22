@@ -23,7 +23,7 @@ const AddMaterial = ({ material, setIsOpen, refetch }) => {
       const responseData = await response.json();
       addSnackbar(responseData.message, responseData.className);
     } catch (error) {
-      console.error("Error creating material:", error.message);
+      console.error("Error creating material");
     }
     refetch("http://localhost:8000/material");
     setIsOpen(false);
