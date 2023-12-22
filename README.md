@@ -1,6 +1,5 @@
 # projet02
 
-Dans le dossier server ctrl + s pour relancer le script de génération de la base de donnée si erreur
 ![Capture d'écran 2023-12-18 100508](https://github.com/gisbseb/projet02/assets/134271562/2c4e44f0-06ae-4d59-9b6e-50f96e7ebaec)
 ![Capture d'écran 2023-12-21 123701](https://github.com/gisbseb/projet02/assets/134271562/42ec5e6a-c368-4c84-a862-638a4f8d21d5)
 
