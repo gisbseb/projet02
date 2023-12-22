@@ -5,10 +5,12 @@ import Navbar from "./navbar/Navbar";
 const AdminLayout = () => {
   return (
     <>
-      <Navbar />
-      <div className="admin-layout">
+      <header>
+        <Navbar />
+      </header>
+      <main className="admin-layout">
         <Outlet />
-      </div>
+      </main>
     </>
   );
 };

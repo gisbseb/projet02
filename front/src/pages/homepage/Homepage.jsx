@@ -12,11 +12,11 @@ const Homepage = () => {
 
   return (
     <div className="homepage page">
-      <div className="card-container">
+      <section className="card-container">
         {data.map((furniture, idx) => (
           <Card key={idx} data={furniture} />
         ))}
-      </div>
+      </section>
     </div>
   );
 };

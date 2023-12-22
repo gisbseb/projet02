@@ -3,10 +3,14 @@ import Navbar from "./navbar/Navbar";
 
 const Layout = () => {
   return (
-    <div>
-      <Navbar />
-      <Outlet />
-    </div>
+    <>
+      <header>
+        <Navbar />
+      </header>
+      <main>
+        <Outlet />
+      </main>
+    </>
   );
 };
 
