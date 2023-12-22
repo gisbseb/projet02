@@ -100,7 +100,7 @@ const populateDb = async () => {
     parseInt(SALT_ROUND)
   );
 
-  const newUser = await User.create(userData);
+  await User.create(userData);
 
   companyData.forEach(async (company) => {
     const newCompany = await Company.create({
@@ -110,7 +110,7 @@ const populateDb = async () => {
     company.materials.forEach(async (material) => {
       const stock = Math.floor(Math.random() * 10) + 1;
 
-      const newMaterial = await Material.create({
+      await Material.create({
         name: material.name,
         companyId: newCompany.id,
         stock: stock,
@@ -120,7 +120,7 @@ const populateDb = async () => {
   });
 
   categoriesData.forEach(async (cat) => {
-    const newCategorie = await Categorie.create(cat);
+    await Categorie.create(cat);
   });
 
   furnituresData.forEach(async (furniture) => {
